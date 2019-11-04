@@ -41,13 +41,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         statusButton.title = Preferences.showSeconds ? Date.now.stringTimeWithSeconds : Date.now.stringTime
         
-        timer = Timer.scheduledTimer(
+        timer = Timer(
             timeInterval: 1,
             target: self,
             selector: #selector(updateStatusText),
             userInfo: nil,
             repeats: true
         )
+        
+        // This will update the title when highlighted
+        RunLoop.main.add(timer!, forMode: .common)
         
         let statusMenu: NSMenu = {
             let menu = NSMenu()
